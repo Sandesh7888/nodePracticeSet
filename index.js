@@ -1,29 +1,4 @@
-const express = require('express');
-const path = require('path');
-const fs = require('fs');
 
-const app = express();
-const FILES_DIR = path.join(__dirname, 'files');
-
-/* Middleware */
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
-
-/* View Engine */
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
-
-/* Routes */
-
-// Home – list todos
-app.get('/', (req, res) => {
-    fs.readdir(FILES_DIR, (err, files) => {
-        if (err) {
-            return res.status(500).send('Unable to read files');
-        }
-        res.render('index', { files });
-    });
 });
 
 // Create todo

@@ -30,6 +30,9 @@ app.get('/', (req, res) => {
 app.post('/create', (req, res) => {
     const { title, description } = req.body;
 
+    if (!title) {
+        return res.status(400).send('Title is required');
+    }
 
     const fileName = `${title.split(' ').join('_')}.txt`;
     const content = `Title: ${title}\n\nDescription: ${description || ''}`;
